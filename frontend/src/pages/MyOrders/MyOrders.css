@@ -27,11 +27,11 @@
     font-weight: 500;
     color: #454545;
 }
-.my-orders-order button{
+.my-orders button{
     border: none;
     padding: 12px 0px;
     border-radius: 4px;
-    background-color: #ffe1e1;
+    background-color: #FFE1E1;
     cursor: pointer;
     color: #454545;
 }
@@ -44,4 +44,5 @@
     .my-orders-order button{
         font-size: 10px;
     }
+    
 }
