@@ -1,0 +1,57 @@
+.dish-video-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .dish-video-gallery h1 {
+    color: #262626;
+    font-weight: 500;
+  }
+  
+  .dish-video-gallery-text {
+    max-width: 60%;
+    color: #808080;
+  }
+  
+  .dish-video-gallery-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+    margin: 20px 0px;
+  }
+  
+  .dish-video-gallery-list-item iframe {
+    width: 400px; /* Adjust the width */
+    height: 300px; /* Adjust the height */
+    border: none;
+    transition: 0.2s;
+  }
+  
+  .dish-video-gallery-list-item p {
+    margin-top: 10px;
+    color: #747474;
+    font-size: 18px;
+  }
+  
+  .dish-video-gallery hr {
+    margin: 10px 0px;
+    height: 2px;
+    background-color: #e2e2e2;
+    border: none;
+  }
+  
+  @media (max-width: 1050px) {
+    .dish-video-gallery-text {
+      max-width: 100%;
+      font-size: 14px;
+    }
+  
+    .dish-video-gallery-list-item iframe {
+      width: 300px; /* Adjust for smaller screens */
+      height: 225px;
+    }
+  }
+  

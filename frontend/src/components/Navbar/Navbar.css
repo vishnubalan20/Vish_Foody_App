@@ -9,6 +9,12 @@
     width: 150px;
 }
 
+.navbar img {
+    
+}
+.navbar-right img {
+    height: 35px;
+}
 .navbar-menu {
     display: flex;
     list-style: none;
@@ -111,6 +117,7 @@ position: relative;
 
     .navbar-right img {
         width: 22px;
+        height: 20px;
     }
 
     .navbar-right button {
@@ -134,6 +141,7 @@ position: relative;
 
     .navbar-right img {
         width: 20px;
+        height: 20px;
     }
 
     .navbar-right button {
