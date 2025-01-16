@@ -1,42 +1,112 @@
-.order-item{
+.order-item {
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
-    align-items: start;
-    gap: 30px;
-    border: 1px solid tomato;
+    grid-template-columns: 1fr 3fr 1.5fr 1.5fr 1fr;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #f0a6a6;  /* Soft tomato color */
     padding: 20px;
-    margin: 30px 0px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-size: 14px;
     color: #505050;
+    transition: all 0.3s ease;
 }
-.order-item-food,.order-item-name{
+
+.order-item:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.order-item-food,
+.order-item-name {
     font-weight: 600;
 }
-.order-item-name{
-    margin-top: 30px;
-    margin-bottom: 5px;
+
+.order-item-name {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
 }
-.order-item-address{
-    margin-bottom: 10px;
+
+.order-item-address {
+    margin-bottom: 12px;
+    color: #777;
+    font-size: 12px;
 }
-.order-item select{
+
+.order-item select {
     background-color: #ffe8e4;
-    border: 1px solid tomato;
-    width: max(10vw,120px);
-    padding: 10px;
-    outline:none;
+    border: 1px solid #f0a6a6;
+    padding: 8px 12px;
+    border-radius: 5px;
+    width: max(12vw, 140px);
+    outline: none;
+    font-size: 14px;
 }
-@media(max-width:1000px){
-    .order-item{
+
+.order-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.order-item-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.order-item-actions button {
+    padding: 8px 20px;
+    border: none;
+    background-color: #f0a6a6;
+    color: white;
+    font-size: 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.order-item-actions button:hover {
+    background-color: #f06565;
+}
+
+@media (max-width: 1000px) {
+    .order-item {
+        grid-template-columns: 1fr 2.5fr 1fr;
+        padding: 15px 10px;
         font-size: 12px;
-        grid-template-columns: 0.5fr 2fr 1fr;
-        padding: 15px 8px;
     }
-    .order-item select{
-        padding: 5px;
-        font-size: 12px;
-    }
-    .order-item img{
+
+    .order-item img {
         width: 40px;
+        height: 40px;
+    }
+
+    .order-item select {
+        padding: 6px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .order-item {
+        grid-template-columns: 1fr 2fr 1fr;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .order-item-name {
+        font-size: 14px;
+    }
+
+    .order-item-address {
+        font-size: 11px;
+    }
+
+    .order-item select {
+        font-size: 11px;
     }
 }

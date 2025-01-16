@@ -1,35 +1,107 @@
-.add{
-    width: 70%;
-    margin-left: max(5vw,25px);
+.add {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 50px;
-    color: #6D6D6D;
+    color: #333;
     font-size: 16px;
 }
-.add form{
-   gap: 20px;
-}
-.add-img-upload img{
-    width: 120px;
-}
-.add-product-name, .add-product-description{
-    width: max(40%,280px);
-}
-.add-product-name input ,.add-product-description textarea{
-    padding: 10px 10px;
-}
-.add-category-price{
+
+.add form {
     display: flex;
-    gap: 30px;
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px;
+    background-color: #e8e0cd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-.add-category-price select,.add-category-price input{
-    max-width: 120px;
-    padding: 10px;
+
+.add-img-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
-.add-btn{
-    max-width: 120px;
-    border: none;
-    padding: 10px;
-    background-color: black;
-    color: white;
+
+.add-img-upload img {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    object-fit: cover;
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.add-img-upload input {
+    display: none;
+}
+
+.add-img-upload label {
+    cursor: pointer;
+}
+
+.add-img-upload img:hover {
+    transform: scale(1.05);
+}
+
+.add-product-name,
+.add-product-description,
+.add-category-price {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-product-name input,
+.add-product-description textarea,
+.add-category-price select,
+.add-category-price input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.add-product-name input:focus,
+.add-product-description textarea:focus,
+.add-category-price select:focus,
+.add-category-price input:focus {
+    border-color: #4CAF50;
+}
+
+.add-category-price {
+    display: flex;
+    gap: 20px;
+}
+
+.add-category-price select,
+.add-category-price input {
+    max-width: 150px;
+    width: 100%;
+}
+
+.add-btn {
+    padding: 12px 20px;
+    background-color: #dbbe2c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    align-self: center;
+}
+
+.add-btn:hover {
+    background-color:#f91a1a;
+    ;
+}
+
+.add-btn:active {
+    background-color: #f91a1a;
 }
