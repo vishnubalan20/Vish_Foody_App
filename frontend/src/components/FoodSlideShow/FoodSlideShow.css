@@ -24,8 +24,8 @@
   }
   
   .dish-video-gallery-list-item iframe {
-    width: 400px; /* Adjust the width */
-    height: 300px; /* Adjust the height */
+    width: 1200px; /* Adjust the width */
+    height: 600px; /* Adjust the height */
     border: none;
     transition: 0.2s;
   }

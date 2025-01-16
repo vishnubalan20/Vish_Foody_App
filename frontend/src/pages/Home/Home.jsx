@@ -12,9 +12,9 @@ const Home = () => {
   return (
     <>
       <Header/>
-      <FoodSlideShow/>
       <ExploreMenu setCategory={setCategory} category={category}/>
       <FoodDisplay category={category}/>
+      <FoodSlideShow/>
     </>
   )
 }
