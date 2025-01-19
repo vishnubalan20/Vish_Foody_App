@@ -1,29 +1,25 @@
-import React from 'react'
-import Navbar from './components/Navbar/Navbar'
-import Sidebar from './components/Sidebar/Sidebar'
-import { Route, Routes } from 'react-router-dom'
-import Add from './pages/Add/Add'
-import List from './pages/List/List'
-import Orders from './pages/Orders/Orders'
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPopup from './components/LoginPopup/LoginPopup.jsx';
+import Dashboard from './components/Dashboard/Dashboard.jsx';
+import { BrowserRouter } from 'react-router-dom'
 
-const App = () => {
-  return (
-    <div className='app'>
-      <ToastContainer />
-      <Navbar />
-      <hr />
-      <div className="app-content">
-        <Sidebar />
-        <Routes>
-          <Route path="/add" element={<Add />} />
-          <Route path="/list" element={<List />} />
-          <Route path="/orders" element={<Orders />} />
-        </Routes>
-      </div>
-    </div>
-  )
+function App() {
+    const [showLogin, setShowLogin] = useState(true); // State to control LoginPopup visibility
+
+    return (
+
+            <Routes>
+                {/* Default route points to LoginPopup */}
+                <Route
+                    path="/"
+                    element={showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : <Navigate to="/dashboard" />}
+                />
+                {/* Other routes */}
+                <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+
+    );
 }
 
-export default App
+export default App;
