@@ -12,9 +12,11 @@ const Add = () => {
         name: "",
         description: "",
         price: "",
-        category: "Salad"
+        category: "Biriyani"
     });
-
+    const vegList = ['Biriyani', 'Rice varieties', 'Breads', 'Veg curries', 'Breakfast', 'Fried snacks', 'Desserts'];
+    const nonVegList = ["Biriyani", "Starters", 'Breakfast', 'Fries', 'Chicken', 'Mutton', 'Egg', 'Sea foods', 'Snacks', 'Soups'];
+    const [productType, setProductType] = useState("Veg");
     const onSubmitHandler = async (event) => {
         event.preventDefault();
 
@@ -29,6 +31,7 @@ const Add = () => {
         formData.append("price", Number(data.price));
         formData.append("category", data.category);
         formData.append("image", image);
+        formData.append("productType", productType);
         const response = await axios.post(`${url}/api/food/add`, formData);
         if (response.data.success) {
             toast.success(response.data.message)
@@ -37,7 +40,8 @@ const Add = () => {
                 description: "",
                 price: "",
                 category: data.category
-            })
+            });
+            setProductType("Veg");
             setImage(false);
         }
         else {
@@ -48,8 +52,14 @@ const Add = () => {
     const onChangeHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        setData(data => ({ ...data, [name]: value }))
+        setData(data => ({ ...data, [name]: value }));
     }
+
+
+    const handleTypeChange = (event) => {
+        onChangeHandler(event);
+        setProductType(event.target.value);
+      };
 
     return (
         <div className='add'>
@@ -70,18 +80,22 @@ const Add = () => {
                     <textarea name='description' onChange={onChangeHandler} value={data.description} type="text" rows={6} placeholder='Write content here' required />
                 </div>
                 <div className='add-category-price'>
+                <div className='add-category flex-col'>
+                        <p>Product type</p>
+                        <select name='productType' onChange={handleTypeChange} >
+                            <option value="Veg">Veg</option>
+                            <option value="Non-Veg">Non-Veg</option>
+                        </select>
+                    </div>
                     <div className='add-category flex-col'>
                         <p>Product category</p>
-                        <select name='category' onChange={onChangeHandler} >
-                            <option value="Salad">Salad</option>
-                            <option value="Rolls">Rolls</option>
-                            <option value="Deserts">Deserts</option>
-                            <option value="Sandwich">Sandwich</option>
-                            <option value="Cake">Cake</option>
-                            <option value="Pure Veg">Pure Veg</option>
-                            <option value="Pasta">Pasta</option>
-                            <option value="Noodles">Noodles</option>
-                        </select>
+                        <select name="category" onChange={onChangeHandler}>
+                            {(productType === "Veg" ? vegList : nonVegList).map((item, index) => (
+                             <option key={index} value={item}>
+                            {item}
+                         </option>
+                         ))}
+                         </select>
                     </div>
                     <div className='add-price flex-col'>
                         <p>Product Price</p>

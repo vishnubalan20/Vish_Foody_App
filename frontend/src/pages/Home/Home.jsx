@@ -8,12 +8,13 @@ import FoodSlideShow from '../../components/FoodSlideShow/FoodSlideShow'
 const Home = () => {
 
   const [category,setCategory] = useState("All")
+  const [productType, setProductType] = useState("Veg");
 
   return (
     <>
       <Header/>
-      <ExploreMenu setCategory={setCategory} category={category}/>
-      <FoodDisplay category={category}/>
+      <ExploreMenu setCategory={setCategory} category={category} productType={productType} setProductType={setProductType} />
+      <FoodDisplay category={category} productType={productType}/>
       <FoodSlideShow/>
     </>
   )
