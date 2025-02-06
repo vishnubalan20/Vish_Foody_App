@@ -3,10 +3,10 @@ import logo from '../assets/logo.jpg'
 import header_img from './header_img.png'
 import search_icon from '../assets/search_icon.png'
 import menu_1 from './menu_1.png'
-import menu_2 from './menu_2.png'
-import menu_3 from './menu_3.png'
-import menu_4 from './menu_4.png'
-import menu_5 from './menu_5.png'
+import menu_2 from './menu_2.jpg'
+import menu_3 from './menu_3.jpg'
+import menu_4 from './menu_4.jpg'
+import menu_5 from './menu_5.jpg'
 import menu_6 from './menu_6.png'
 import menu_7 from './menu_7.png'
 import menu_8 from './menu_8.png'
@@ -104,7 +104,7 @@ export const veg_menu_list = [
         menu_image: menu_4
     },
     {
-        menu_name: "Breakfast",
+        menu_name: "South indian specials",
         menu_image: menu_5
     },
     {
