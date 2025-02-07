@@ -14,7 +14,7 @@
 .explore-menu-list{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 30px;
     text-align: center;
     margin: 20px 0px;
@@ -25,6 +25,7 @@
 }
 .explore-menu-list-item img{
     width: 8.5vw;
+    height: 5.5vw;
     min-width: 80px;
     cursor: pointer;
     border-radius: 20%;
