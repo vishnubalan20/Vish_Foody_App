@@ -14,8 +14,8 @@ const Add = () => {
         price: "",
         category: "Biriyani"
     });
-    const vegList = ['Biriyani', 'Rice varieties', 'Breads', 'Veg curries', 'Breakfast', 'Fried snacks', 'Desserts'];
-    const nonVegList = ["Biriyani", "Starters", 'Breakfast', 'Fries', 'Chicken', 'Mutton', 'Egg', 'Sea foods', 'Snacks', 'Soups'];
+    const vegList = ['Biriyani', 'Rice varieties', 'Breads', 'Veg curries', 'South indian specials', 'Veg soups', 'Dosa Varieties', 'Salads'];
+    const nonVegList = ["Biriyani", "Curries & Gravies", 'Sea foods', 'Fried Dishes', 'Grilled/BBQ Items', 'Appetizers/Starters', 'Soups', 'Specialty Dishes'];
     const [productType, setProductType] = useState("Veg");
     const onSubmitHandler = async (event) => {
         event.preventDefault();

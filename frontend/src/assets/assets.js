@@ -116,7 +116,7 @@ export const veg_menu_list = [
         menu_image: menu_5
     },
     {
-        menu_name: "veg soups",
+        menu_name: "Veg soups",
         menu_image: menu_6
     },
     {
