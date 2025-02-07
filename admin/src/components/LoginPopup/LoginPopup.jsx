@@ -1,63 +1,77 @@
-import React, { useContext, useState } from 'react'
-import './LoginPopup.css'
-import { assets } from '../../assets/assets'
-import { StoreContext } from '../../context/StoreContext'
-import axios from 'axios'
-import { toast } from 'react-toastify'
+import React, { useState } from 'react';
+import './LoginPopup.css';
+import { assets } from '../../assets/assets';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const LoginPopup = ({ setShowLogin }) => {
-
     const url = "http://localhost:4000";
     const [currState, setCurrState] = useState("Sign Up");
 
     const [data, setData] = useState({
         name: "",
         email: "",
-        password: ""
-    })
+        password: "",
+        admincode: ""
+    });
+
+    const [error, setError] = useState("");
+
+    const correctAdminCode = "ADMIN005"; // Replace with the actual admin code
 
     const onChangeHandler = (event) => {
-        const name = event.target.name
-        const value = event.target.value
-        setData(data => ({ ...data, [name]: value }))
-    }
+        const { name, value } = event.target;
+        setData((prevData) => ({ ...prevData, [name]: value }));
+    };
 
     const onLogin = async (e) => {
-        e.preventDefault()
-        let new_url = url;
-        if (currState === "Login") {
-            new_url += "/api/user/login";
+        e.preventDefault();
+        
+        if (currState === "Sign Up" && data.admincode !== correctAdminCode) {
+            setError("Invalid Admin Code! Please enter the correct one.");
+            return;
         }
-        else {
-            new_url += "/api/user/register"
+
+        setError(""); // Clear any previous error messages
+
+        let new_url = url + (currState === "Login" ? "/api/user/login" : "/api/user/register");
+
+        try {
+            const response = await axios.post(new_url, data);
+
+            if (response.data.success) {
+                setShowLogin(false);
+                console.log("Sign up successful");
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            toast.error("An error occurred. Please try again.");
         }
-        const response = await axios.post(new_url, data);
-        if (response.data.success) {
-            // setToken(response.data.token)
-            // localStorage.setItem("token", response.data.token)
-            setShowLogin(false);
-            console.log("sign up success");
-        }
-        else {
-            toast.error(response.data.message)
-        }
-    }
+    };
 
     return (
         <div className='login-popup'>
             <form onSubmit={onLogin} className="login-popup-container">
                 <div className="login-popup-title">
-                    <h2>{currState}</h2> <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="" />
+                    <h2>{currState}</h2> 
+                  
                 </div>
                 <div className="login-popup-inputs">
-                    {currState === "Sign Up" ? <input name='name' onChange={onChangeHandler} value={data.name} type="text" placeholder='Your name' required /> : <></>}
-                    <input name='email' onChange={onChangeHandler} value={data.email} type="email" placeholder='Your email' />
+                    {currState === "Sign Up" && (
+                        <>
+                            <input name='name' onChange={onChangeHandler} value={data.name} type="text" placeholder='Your name' required />
+                            <input name='admincode' onChange={onChangeHandler} value={data.admincode} type="text" placeholder='Admin code' required />
+                            {error && <p style={{ color: 'red' }}>{error}</p>} {/* Show error if admin code is incorrect */}
+                        </>
+                    )}
+                    <input name='email' onChange={onChangeHandler} value={data.email} type="email" placeholder='Your email' required />
                     <input name='password' onChange={onChangeHandler} value={data.password} type="password" placeholder='Password' required />
                 </div>
-                <button>{currState === "Login" ? "Login" : "Create account"}</button>
+                <button type="submit">{currState === "Login" ? "Login" : "Create account"}</button>
                 <div className="login-popup-condition">
-                    <input type="checkbox" name="" id="" required/>
-                    <p>By continuing, i agree to the terms of use & privacy policy.</p>
+                    <input type="checkbox" required />
+                    <p>By continuing, I agree to the terms of use & privacy policy.</p>
                 </div>
                 {currState === "Login"
                     ? <p>Create a new account? <span onClick={() => setCurrState('Sign Up')}>Click here</span></p>
@@ -65,7 +79,7 @@ const LoginPopup = ({ setShowLogin }) => {
                 }
             </form>
         </div>
-    )
-}
+    );
+};
 
-export default LoginPopup
+export default LoginPopup;

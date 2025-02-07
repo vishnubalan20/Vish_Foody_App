@@ -20,7 +20,7 @@ function App() {
             ) : (
                 <div className='app'>
                 <ToastContainer />
-                <Navbar />
+                <Navbar showLogin={showLogin} setShowLogin={setShowLogin} />
                 <hr />
                 <div className="app-content">
                   <Sidebar />
