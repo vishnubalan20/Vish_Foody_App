@@ -6,10 +6,18 @@ import menu_1 from './menu_1.png'
 import menu_2 from './menu_2.jpg'
 import menu_3 from './menu_3.jpg'
 import menu_4 from './menu_4.jpg'
-import menu_5 from './menu_5.jpg'
-import menu_6 from './menu_6.png'
-import menu_7 from './menu_7.png'
-import menu_8 from './menu_8.png'
+import menu_5 from './menu_5.webp'
+import menu_6 from './menu_6.jpg'
+import menu_7 from './menu_7.webp'
+import menu_8 from './menu_8.avif'
+import nonveg_1 from './nonveg_1.webp'
+import nonveg_2 from './nonveg_1.webp'
+import nonveg_3 from './nonveg_3.webp'
+import nonveg_4 from './nonveg_4.jpg'
+import nonveg_5 from './nonveg_5.jpg'
+import nonveg_6 from './nonveg_6.jpg'
+import nonveg_7 from './nonveg_7.jpg'
+import nonveg_8 from './nonveg_8.jpg'
 
 import food_1 from './food_1.png'
 import food_2 from './food_2.png'
@@ -108,46 +116,50 @@ export const veg_menu_list = [
         menu_image: menu_5
     },
     {
-        menu_name: "Fried snacks",
+        menu_name: "veg soups",
         menu_image: menu_6
     },
     {
-        menu_name: "Desserts",
+        menu_name: "Dosa Varieties",
         menu_image: menu_7
+    },
+    {
+        menu_name: "Salads",
+        menu_image: menu_8
     }]
 
     export const non_veg_menu_list = [
         {
             menu_name: "Biriyani",
-            menu_image: menu_1
+            menu_image: nonveg_1
         },
         {
-            menu_name: "Starters",
-            menu_image: menu_2
+            menu_name: "Curries & Gravies",
+            menu_image: nonveg_2
         },
         {
-            menu_name: "Breakfast",
-            menu_image: menu_3
+            menu_name: "Sea foods",
+            menu_image: nonveg_3
         },
         {
-            menu_name: "Fries",
-            menu_image: menu_4
+            menu_name: "Fried Dishes",
+            menu_image: nonveg_4
         },
         {
-            menu_name: "Chicken",
-            menu_image: menu_5
+            menu_name: "Grilled/BBQ Items",
+            menu_image: nonveg_5
         },
         {
-            menu_name: "Pure Veg",
-            menu_image: menu_6
+            menu_name: "Appetizers/Starters",
+            menu_image: nonveg_6
         },
         {
-            menu_name: "Mutton",
-            menu_image: menu_7
+            menu_name: "Soups",
+            menu_image: nonveg_7
         },
         {
-            menu_name: "Egg",
-            menu_image: menu_8
+            menu_name: "Specialty Dishes",
+            menu_image: nonveg_8
         }]
 
 export const food_list = [
