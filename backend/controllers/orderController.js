@@ -8,15 +8,19 @@ const currency = "inr";
 const deliveryCharge = 50;
 const frontend_URL = 'http://localhost:5173';
 
+
+
 // Placing User Order for Frontend using stripe
 const placeOrder = async (req, res) => {
-
+    debugger;
+console.log(req.body);
     try {
         const newOrder = new orderModel({
             userId: req.body.userId,
             items: req.body.items,
             amount: req.body.amount,
             address: req.body.address,
+            orderId: req.body.orderId
         })
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
@@ -60,6 +64,8 @@ const placeOrder = async (req, res) => {
 
 // Placing User Order for Frontend using stripe
 const placeOrderCod = async (req, res) => {
+    debugger;
+    console.log(req.body);
 
     try {
         const newOrder = new orderModel({
@@ -68,6 +74,7 @@ const placeOrderCod = async (req, res) => {
             amount: req.body.amount,
             address: req.body.address,
             payment: true,
+            orderId: req.body.orderId
         })
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });

@@ -24,6 +24,11 @@ const PlaceOrder = () => {
     const { getTotalCartAmount, token, food_list, cartItems, url, setCartItems,currency,deliveryCharge } = useContext(StoreContext);
 
     const navigate = useNavigate();
+    const generateOrderId = () => {
+        const timestamp = Date.now().toString().slice(-5); // Last 5 digits of the timestamp
+        const randomString = Math.random().toString(36).substring(2, 6).toUpperCase(); // Random 4-character string
+        return `ORD${timestamp}${randomString}`; // Combining both
+      }
 
     const onChangeHandler = (event) => {
         const name = event.target.name
@@ -45,6 +50,7 @@ const PlaceOrder = () => {
             address: data,
             items: orderItems,
             amount: getTotalCartAmount() + deliveryCharge,
+            orderId: generateOrderId(),
         }
         if (payment === "stripe") {
             let response = await axios.post(url + "/api/order/place", orderData, { headers: { token } });
