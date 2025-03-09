@@ -3,7 +3,7 @@ import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 
 const TrackOrderMap = ({ orderId }) => {
   const [location, setLocation] = useState(null);
-  const googleMapsApiKey = 'AIzaSyAVXLLfagT7KcZgG4kG4kApvl3FtJWocVg'; // Replace with your actual API Key
+  const googleMapsApiKey = "" // Replace with your actual API Key
 
   // Set initial map container style
   const mapContainerStyle = {
