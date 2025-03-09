@@ -4,9 +4,13 @@ import './MyOrders.css';
 import axios from 'axios';
 import { StoreContext } from '../../Context/StoreContext';
 import { assets } from '../../assets/assets';
+import TrackOrderMap from '../TrackOrderMap/TrackOrderMap'; // Import the map component
 
 const MyOrders = () => {
   const [data, setData] = useState([]);
+  const [trackingOrderId, setTrackingOrderId] = useState(null);
+  const [showTrackOrder, setShowTrackOrder] = useState(false);
+  const [trackButtonName , setTrackButtonName] = useState("Track order");
   const { url, token, currency, foodName, setFoodName } = useContext(StoreContext);
   const navigate = useNavigate();
 
@@ -40,6 +44,19 @@ const MyOrders = () => {
     navigate(`/rate-order/${orderId}`);
   }
 
+    // Handle track order button click
+    const handleTrackOrder = (orderId) => {
+      setTrackingOrderId(orderId); // Set the selected order ID to show the map
+      if(trackButtonName == "Track order"){
+        setTrackButtonName("Hide Track");
+        setShowTrackOrder(true);
+      }
+      else {
+        setShowTrackOrder(false);
+        setTrackButtonName("Track order");
+      }
+    };
+
   return (
     <div className='my-orders'>
       <h2>My Orders</h2>
@@ -59,11 +76,18 @@ const MyOrders = () => {
             <p>{currency}{order.amount}.00</p>
             <p>Items: {order.items.length}</p>
             <p><span>&#x25cf;</span> <b>{order.status}</b></p>
-            <button onClick={fetchOrders}>Track Order</button>
-            
+             {/* Track Order Button */}
+             {order.status !== 'Delivered' && (
+              <button onClick={() => handleTrackOrder(order.orderId)}>{trackButtonName}</button>
+            )}
             {/* Rate Order Button */}
             {order.status == "Delivered" && (
               <button className="rate-order-btn" onClick={() => handleRateOrder(order.orderId, order)}>Rate Order</button>
+            )}
+
+                 {/* Display the map when the order is being tracked */}
+                 {showTrackOrder && trackingOrderId && trackingOrderId === order.orderId && (
+              <TrackOrderMap orderId={order.orderId} />
             )}
           </div>
         ))}
