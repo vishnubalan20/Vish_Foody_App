@@ -6,7 +6,7 @@ import './RateOrder.css';
 
 const RateOrder = () => {
   const { orderId } = useParams();
-  const { url, token } = useContext(StoreContext);
+  const { url, token, foodName } = useContext(StoreContext);
   const navigate = useNavigate();
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState('');
@@ -16,7 +16,8 @@ const RateOrder = () => {
       const feedbackData = {
         orderId,
         rating,
-        feedback
+        feedback,
+        foodName
       };
     let response = await axios.post("http://localhost:4000/api/order/feedback", feedbackData, { headers: { token } }).then((responseData)=>{
       console.log("response", responseData);

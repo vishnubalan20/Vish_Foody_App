@@ -142,13 +142,14 @@ const submitFeedbackRating = async (req,res) => {
     {
         try {
           // Extract feedback data from the request body
-          const { orderId, rating, feedback } = req.body;
+          const { orderId, rating, feedback, foodName } = req.body;
       
           // Create a new feedback document
           const newFeedback = new feedbackModel({
             orderId,
             rating,
-            feedback
+            feedback,
+            foodName
           });
       
           // Save the new feedback document to MongoDB

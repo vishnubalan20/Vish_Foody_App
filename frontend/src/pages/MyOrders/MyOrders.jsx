@@ -7,7 +7,7 @@ import { assets } from '../../assets/assets';
 
 const MyOrders = () => {
   const [data, setData] = useState([]);
-  const { url, token, currency } = useContext(StoreContext);
+  const { url, token, currency, foodName, setFoodName } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const fetchOrders = async () => {
@@ -28,8 +28,15 @@ const MyOrders = () => {
     return `ORD${timestamp}${randomString}`;
   }
 
+
+  const getFoodName =(order)=>{
+    return order.items.length > 0 ? order.items[0].name : '';
+  }
   // Redirect to feedback page
-  const handleRateOrder = (orderId) => {
+  const handleRateOrder = (orderId, order) => {
+    const foodName = getFoodName(order);
+    console.log("food name", foodName);
+    setFoodName(foodName);
     navigate(`/rate-order/${orderId}`);
   }
 
@@ -56,7 +63,7 @@ const MyOrders = () => {
             
             {/* Rate Order Button */}
             {order.status == "Delivered" && (
-              <button className="rate-order-btn" onClick={() => handleRateOrder(order.orderId)}>Rate Order</button>
+              <button className="rate-order-btn" onClick={() => handleRateOrder(order.orderId, order)}>Rate Order</button>
             )}
           </div>
         ))}
