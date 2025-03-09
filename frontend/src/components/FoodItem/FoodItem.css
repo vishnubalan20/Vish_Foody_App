@@ -46,7 +46,7 @@
     padding: 20px;
 }
 .food-item-name-rating{
-    display: flex;
+    display: grid;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
@@ -68,3 +68,27 @@
     font-weight: 500;
     margin: 10px 0px;
 }
+
+.food-item-rating {
+    display: flex;
+    align-items: center;
+  }
+  
+  .starStyle {
+    font-size: 20px; /* Adjust star size */
+    margin-right: 3px; /* Spacing between stars */
+  }
+  
+  .full {
+    color: orange; /* Full star color */
+  }
+  
+  .half {
+    color: orange; /* Half star color (same as full, but can be adjusted if needed) */
+    position: relative;
+  }
+  
+  .empty {
+    color: #d3d3d3; /* Empty star color */
+  }
+  

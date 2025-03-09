@@ -197,4 +197,28 @@ const getFeedbackRating =  async (req,res) => {
       }
 }
 
-export { placeOrder, listOrders, userOrders, updateStatus, verifyOrder, placeOrderCod, submitFeedbackRating, getFeedbackRating }
+const getRatingForFood =  async (req,res) => {
+    try {
+        // Extract orderId from the URL params
+        const { name } = req.body;
+    
+        // Find the feedback document(s) associated with the orderId
+        const rating = await feedbackModel.findOne({ foodName: name });
+    
+        if (!rating) {
+          return res.status(404).json({ message: 'Rating not found for this food name' });
+        }
+    
+        // Return the feedback including the rating
+        return res.status(200).json({
+          message: 'Rating found',
+          rating: rating.rating,
+        });
+      } catch (error) {
+        console.error('Error retrieving rating:', error);
+        res.status(500).json({ message: 'Error retrieving rating', error });
+      }
+}
+
+
+export { placeOrder, listOrders, userOrders, updateStatus, verifyOrder, placeOrderCod, submitFeedbackRating, getFeedbackRating , getRatingForFood}
