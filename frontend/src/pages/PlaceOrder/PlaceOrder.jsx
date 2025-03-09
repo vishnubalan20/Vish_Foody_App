@@ -5,8 +5,12 @@ import { assets } from '../../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const PlaceOrder = () => {
+    const location = useLocation();
+    const { finalTotal, discount } = location.state || {}; 
+    const [platformFee, setPlatformFee] = useState(0);
 
     const [payment, setPayment] = useState("cod")
     const [data, setData] = useState({
@@ -110,20 +114,27 @@ const PlaceOrder = () => {
                 <div className="cart-total">
                     <h2>Cart Totals</h2>
                     <div>
-                        <div className="cart-total-details"><p>Subtotal</p><p>{currency}{getTotalCartAmount()}</p></div>
+                        <div className="cart-total-details"><p>Subtotal</p><p>{currency}{finalTotal}</p></div>
                         <hr />
-                        <div className="cart-total-details"><p>Delivery Fee</p><p>{currency}{getTotalCartAmount() === 0 ? 0 : deliveryCharge}</p></div>
+                        <div className="cart-total-details"><p>Platform Fee</p><p>{currency}{platformFee}</p></div>
                         <hr />
-                        <div className="cart-total-details"><b>Total</b><b>{currency}{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + deliveryCharge}</b></div>
+                        <div className="cart-total-details"><b>Total</b><b>{currency}{finalTotal + platformFee}</b></div>
                     </div>
                 </div>
                 <div className="payment">
                     <h2>Payment Method</h2>
-                    <div onClick={() => setPayment("cod")} className="payment-option">
+                    <div onClick={() => {
+                        setPlatformFee(0);
+                        setPayment("cod")
+                    }
+                    } className="payment-option">
                         <img src={payment === "cod" ? assets.checked : assets.un_checked} alt="" />
                         <p>COD ( Cash on delivery )</p>
                     </div>
-                    <div onClick={() => setPayment("stripe")} className="payment-option">
+                    <div onClick={() => {
+                        setPayment("stripe")
+                        setPlatformFee(10);
+                    }} className="payment-option">
                         <img src={payment === "stripe" ? assets.checked : assets.un_checked} alt="" />
                         <p>Stripe ( Credit / Debit )</p>
                     </div>
