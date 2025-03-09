@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './LoginPopup.css';
 import { assets } from '../../assets/assets';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { StoreContext } from '../.././context/StoreContext';
 
 const LoginPopup = ({ setShowLogin }) => {
+    const { token, setToken } = useContext(StoreContext);
     const url = "http://localhost:4000";
     const [currState, setCurrState] = useState("Sign Up");
 
@@ -40,7 +42,9 @@ const LoginPopup = ({ setShowLogin }) => {
             const response = await axios.post(new_url, data);
 
             if (response.data.success) {
+                localStorage.setItem("token", response.data.token);
                 setShowLogin(false);
+                setToken(response.data.token);
                 console.log("Sign up successful");
             } else {
                 toast.error(response.data.message);

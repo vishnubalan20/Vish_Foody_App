@@ -1,5 +1,6 @@
 import orderModel from "../models/orderModel.js";
-import userModel from "../models/userModel.js"
+import userModel from "../models/userModel.js";
+import feedbackModel from "../models/feedbackModel.js";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -64,8 +65,6 @@ console.log(req.body);
 
 // Placing User Order for Frontend using stripe
 const placeOrderCod = async (req, res) => {
-    debugger;
-    console.log(req.body);
 
     try {
         const newOrder = new orderModel({
@@ -110,6 +109,7 @@ const userOrders = async (req, res) => {
 }
 
 const updateStatus = async (req, res) => {
+    debugger;
     console.log(req.body);
     try {
         await orderModel.findByIdAndUpdate(req.body.orderId, { status: req.body.status });
@@ -137,4 +137,63 @@ const verifyOrder = async (req, res) => {
 
 }
 
-export { placeOrder, listOrders, userOrders, updateStatus, verifyOrder, placeOrderCod }
+const submitFeedbackRating = async (req,res) => {
+
+    {
+        try {
+          // Extract feedback data from the request body
+          const { orderId, rating, feedback } = req.body;
+      
+          // Create a new feedback document
+          const newFeedback = new feedbackModel({
+            orderId,
+            rating,
+            feedback
+          });
+      
+          // Save the new feedback document to MongoDB
+          const savedFeedback = await newFeedback.save();
+      
+          // Respond with the saved feedback
+          res.status(201).json({
+            message: 'success',
+            feedback: savedFeedback
+          });
+        } catch (error) {
+          // Handle errors if saving the feedback fails
+          console.error('Error saving feedback:', error);
+          res.status(500).json({ message: 'error', error });
+        }
+      }
+
+}
+
+
+const getFeedbackRating =  async (req,res) => {
+    try {
+        // Extract orderId from the URL params
+        const { orderId } = req.body;
+    
+        // Find the feedback document(s) associated with the orderId
+        const feedback = await feedbackModel.findOne({ orderId });
+    
+        if (!feedback) {
+          return res.status(404).json({ message: 'Feedback not found for this orderId' });
+        }
+    
+        // Return the feedback including the rating
+        return res.status(200).json({
+          message: 'Feedback found',
+          feedback: {
+            orderId: feedback.orderId,
+            rating: feedback.rating,
+            feedbackText: feedback.feedback,
+          },
+        });
+      } catch (error) {
+        console.error('Error retrieving feedback:', error);
+        res.status(500).json({ message: 'Error retrieving feedback', error });
+      }
+}
+
+export { placeOrder, listOrders, userOrders, updateStatus, verifyOrder, placeOrderCod, submitFeedbackRating, getFeedbackRating }
