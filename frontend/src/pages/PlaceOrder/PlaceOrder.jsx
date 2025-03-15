@@ -25,14 +25,14 @@ const PlaceOrder = () => {
         phone: ""
     })
 
-    const { getTotalCartAmount, token, food_list, cartItems, url, setCartItems,currency,deliveryCharge } = useContext(StoreContext);
+    const { getTotalCartAmount, token, food_list, cartItems, url, setCartItems, currency, deliveryCharge } = useContext(StoreContext);
 
     const navigate = useNavigate();
     const generateOrderId = () => {
         const timestamp = Date.now().toString().slice(-5); // Last 5 digits of the timestamp
         const randomString = Math.random().toString(36).substring(2, 6).toUpperCase(); // Random 4-character string
         return `ORD${timestamp}${randomString}`; // Combining both
-      }
+    }
 
     const onChangeHandler = (event) => {
         const name = event.target.name
@@ -66,7 +66,7 @@ const PlaceOrder = () => {
                 toast.error("Something Went Wrong")
             }
         }
-        else{
+        else {
             let response = await axios.post(url + "/api/order/placecod", orderData, { headers: { token } });
             if (response.data.success) {
                 navigate("/myorders")
@@ -89,6 +89,18 @@ const PlaceOrder = () => {
             navigate('/cart')
         }
     }, [token])
+
+    // Add conditional logic for coupon messages based on finalTotal
+    const renderCouponMessage = () => {
+        if (finalTotal > 2000) {
+            return <p className="coupon-message">Use Coupon Code <strong>DISCOUNT50</strong> for a 50% discount on your next order!</p>;
+        } else if (finalTotal > 1000) {
+            return <p className="coupon-message">Use Coupon Code <strong>DISCOUNT20</strong> for a 20% discount on your next order!</p>;
+        } else if (finalTotal > 500) {
+            return <p className="coupon-message">Use Coupon Code <strong>DISCOUNT10</strong> for a 10% discount on your next order!</p>;
+        }
+        return null;
+    };
 
     return (
         <form onSubmit={placeOrder} className='place-order'>
@@ -121,6 +133,10 @@ const PlaceOrder = () => {
                         <div className="cart-total-details"><b>Total</b><b>{currency}{finalTotal + platformFee}</b></div>
                     </div>
                 </div>
+                <br/>
+                {/* Display Coupon Message */}
+                {renderCouponMessage()}
+
                 <div className="payment">
                     <h2>Payment Method</h2>
                     <div onClick={() => {
@@ -139,10 +155,10 @@ const PlaceOrder = () => {
                         <p>Stripe ( Credit / Debit )</p>
                     </div>
                 </div>
-                <button className='place-order-submit' type='submit'>{payment==="cod"?"Place Order":"Proceed To Payment"}</button>
+                <button className='place-order-submit' type='submit'>{payment === "cod" ? "Place Order" : "Proceed To Payment"}</button>
             </div>
         </form>
     )
 }
 
-export default PlaceOrder
+export default PlaceOrder;

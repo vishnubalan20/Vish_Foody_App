@@ -16,7 +16,11 @@ const Cart = () => {
             setDiscount(10); // Apply 10% discount
         } else if (promoCode === "DISCOUNT50") {
             setDiscount(50); // Apply 50% discount
-        } else {
+        } 
+        else if (promoCode === "DISCOUNT20") {
+            setDiscount(20); // Apply 50% discount
+        } 
+        else {
             setDiscount(0); // No discount for invalid code
             alert("Invalid promo code");
         }
