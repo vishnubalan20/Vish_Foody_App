@@ -149,7 +149,7 @@ const Order = () => {
   }, []);
 
   if (isLoading) {
-    return <div className="loading">Loading orders...</div>;
+    return <div className="loading">Loading orders..</div>;
   }
 
   return (
