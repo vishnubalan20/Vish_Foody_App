@@ -126,6 +126,7 @@ const Order = () => {
         ].filter(Boolean).join(', ') || 'N/A',
         'Phone': order.address?.phone || 'N/A',
         'Amount': `${currency}${order.amount || 0}`,
+        'Payment': order.amountPaid || 'N/A',
         'Status': order.status || 'N/A',
         'Rating': ratings[order.orderId] !== undefined ? ratings[order.orderId] : 'N/A'
       }));
@@ -203,6 +204,7 @@ const Order = () => {
                     ].filter(Boolean).join(', ')}
                   </p>
                 </div>
+                {order.amountPaid!=undefined &&  <p>Payment: {order.amountPaid}</p>}
                 <p className='order-item-phone'>Phone: {order.address?.phone || 'N/A'}</p>
                 <p className='order-item-phone'>Order ID: {order.orderId || 'N/A'}</p>
                 <p className='order-item-rating'>

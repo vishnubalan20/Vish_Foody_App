@@ -21,7 +21,8 @@ console.log(req.body);
             items: req.body.items,
             amount: req.body.amount,
             address: req.body.address,
-            orderId: req.body.orderId
+            orderId: req.body.orderId,
+            amountPaid: req.body.amountPaid
         })
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
@@ -73,7 +74,8 @@ const placeOrderCod = async (req, res) => {
             amount: req.body.amount,
             address: req.body.address,
             payment: true,
-            orderId: req.body.orderId
+            orderId: req.body.orderId,
+            amountPaid: req.body.amountPaid
         })
         await newOrder.save();
         await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });

@@ -73,7 +73,10 @@ const MyOrders = () => {
             <p>{order.items.map((item, index) => (
               index === order.items.length - 1 ? item.name + " x " + item.quantity : item.name + " x " + item.quantity + ", "
             ))}</p>
+            <div>
             <p>{currency}{order.amount}.00</p>
+           {order.amountPaid!=undefined &&  <p>Payment: {order.amountPaid}</p>}
+            </div>
             <p>Items: {order.items.length}</p>
             <p><span>&#x25cf;</span> <b>{order.status}</b></p>
              {/* Track Order Button */}

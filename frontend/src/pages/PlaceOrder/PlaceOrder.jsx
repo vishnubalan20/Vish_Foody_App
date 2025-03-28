@@ -60,6 +60,7 @@ const PlaceOrder = () => {
             orderId: generateOrderId(),
         }
         if (payment === "stripe") {
+            orderData.amountPaid = 'Paid';
             let response = await axios.post(url + "/api/order/place", orderData, { headers: { token } });
             if (response.data.success) {
                 const { session_url } = response.data;
@@ -68,6 +69,12 @@ const PlaceOrder = () => {
                 toast.error("Something Went Wrong");
             }
         } else if (payment === "cod" || payment ==="qr") {
+            if(payment === "cod" ){
+                orderData.amountPaid = 'Un paid';
+            }
+            if(payment === "qr" ){
+                orderData.amountPaid = 'Paid';
+            }
             let response = await axios.post(url + "/api/order/placecod", orderData, { headers: { token } });
             if (response.data.success) {
                 navigate("/myorders");
