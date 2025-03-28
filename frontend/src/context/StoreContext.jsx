@@ -14,11 +14,15 @@ const StoreContextProvider = (props) => {
     const [foodName, setFoodName] = useState("");
 
     const addToCart = async (itemId) => {
+        debugger;
         if (!cartItems[itemId]) {
             setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
         }
         else {
-            setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+            if(cartItems[itemId]<=9) {
+                setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+            }
+           
         }
         if (token) {
             await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } });
